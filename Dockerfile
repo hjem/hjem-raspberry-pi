@@ -70,7 +70,7 @@ COPY docker-php-ext-* /usr/local/bin/
 
 WORKDIR /var/www/
 COPY php-fpm.conf /usr/local/etc/
-RUN touch /var/run/php5-fpm.sock
+RUN mkdir -p /var/run/php5-fpm && chown -R www-data:www-data /var/run/php5-fpm
 
 #
 # Additional packages
