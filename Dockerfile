@@ -75,7 +75,7 @@ RUN mkdir -p /var/run/php5-fpm && chown -R www-data:www-data /var/run/php5-fpm
 #
 # Additional packages
 #
-RUN apt-get update && apt-get install -y nginx supervisor git && rm -r /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y nginx supervisor git --no-install-recommends && rm -r /var/lib/apt/lists/*
 
 #
 # hjem source code
