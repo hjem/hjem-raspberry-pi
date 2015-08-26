@@ -76,11 +76,15 @@ RUN mkdir -p /var/run/php5-fpm && chown -R www-data:www-data /var/run/php5-fpm
 # Additional packages
 #
 RUN apt-get update && apt-get install -y nginx supervisor git --no-install-recommends && rm -r /var/lib/apt/lists/*
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 #
 # hjem source code
 #
-RUN rm -rf /var/www/html && git clone https://github.com/hjem/hjem.git /var/www/hjem
+RUN rm -rf /var/www/html && \
+  git clone https://github.com/hjem/hjem.git /var/www/hjem && \
+  cd /var/www/hjem && \
+  composer install -o --no-dev --prefer-source --no-interaction
 
 #
 # nginx
