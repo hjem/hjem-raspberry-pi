@@ -1,5 +1,8 @@
-# Pull base image
+# Pull base image (either ARM based for Raspberry Pi or x86 based for regular image)
+
+# FROM debian:jessie
 FROM resin/rpi-raspbian:jessie
+
 MAINTAINER Mathias Hansen <me@codemonkey.io>
 
 #
@@ -71,6 +74,7 @@ COPY docker-php-ext-* /usr/local/bin/
 WORKDIR /var/www/
 COPY php-fpm.conf /usr/local/etc/
 RUN mkdir -p /var/run/php5-fpm && chown -R www-data:www-data /var/run/php5-fpm
+COPY php-extra.ini /usr/local/etc/php/conf.d/
 
 #
 # Additional packages
@@ -85,7 +89,10 @@ RUN docker-php-ext-install mbstring
 RUN rm -rf /var/www/html && \
   git clone https://github.com/hjem/hjem.git /var/www/hjem && \
   cd /var/www/hjem && \
-  composer install -o --no-dev --prefer-source --no-interaction
+  composer install -o --no-dev --prefer-source --no-interaction && \
+  touch storage/database.sqlite && \
+  chmod -R 777 storage && \
+  chmod -R 777 bootstrap
 
 #
 # nginx

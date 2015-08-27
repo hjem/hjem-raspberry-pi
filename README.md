@@ -16,9 +16,16 @@ First, make sure to have docker set up on your Raspberry Pi. We recomnend the [h
 
 Starting a hjem instance is simple:
 
-	docker run --name my-hjem -e "NEST_THERMOSTAT_EMAIL=mail@example.com" -e "NEST_THERMOSTAT_PASSWORD=12345" -p 80:80 -d minicodemonkey/rpi-hjem
+	docker run --name my-hjem \
+		-p 80:80 \
+		-e APP_KEY=SomeRandom32CharacterString \
+		-e NEST_THERMOSTAT_EMAIL=mail@example.com \
+		-e NEST_THERMOSTAT_PASSWORD=password \
+		-e PHILIPS_HUE_HUB_IP_ADDRESS=192.168.1.xx \
+		-e PHILIPS_HUE_USERNAME=hue_username \
+		 minicodemonkey/rpi-hjem
 
-This will launch a new hjem instance listening on port `80` configured for a Nest thermostat. For a list of all environment variables that are available, see [.env.example](https://github.com/hjem/hjem/blob/master/.env.example) in the main hjem project.
+This will launch a new hjem instance listening on port `80` configured for a Nest thermostat and Philips Hue. For a list of all environment variables that are available, see [.env.example](https://github.com/hjem/hjem/blob/master/.env.example) in the main hjem project.
 
 ## Build the Docker Image
 Run all the commands from within the project root directory.
