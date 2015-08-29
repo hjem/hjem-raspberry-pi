@@ -79,7 +79,7 @@ COPY php-extra.ini /usr/local/etc/php/conf.d/
 #
 # Additional packages
 #
-RUN apt-get update && apt-get install -y nginx supervisor git --no-install-recommends && rm -r /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y nginx supervisor git libxml2-dev --no-install-recommends && rm -r /var/lib/apt/lists/*
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install sockets
