@@ -84,6 +84,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install sockets
 RUN docker-php-ext-install exif
+RUN docker-php-ext-install soap
 
 #
 # hjem source code
