@@ -83,6 +83,7 @@ RUN apt-get update && apt-get install -y nginx supervisor git --no-install-recom
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install sockets
+RUN docker-php-ext-install exif
 
 #
 # hjem source code
